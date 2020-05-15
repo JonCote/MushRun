@@ -1,8 +1,9 @@
-
+import os
 import time
 import random
 import sqlite3
 import pygame
+
 
 
 CONN = sqlite3.connect('bbScoreBoard.db')
@@ -34,9 +35,9 @@ def close_db():
 create_table()
 pygame.init()       # initialize pygame
 
-
-IMAGES_PATH = 'D:/Projects/Block-Dodger-PyGame/BlockDodger/images'
-SOUND_PATH = 'D:/Projects/Block-Dodger-PyGame/BlockDodger/Sound'
+__loctation__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+IMAGES_PATH = __loctation__ + '/images'
+SOUND_PATH = __loctation__ + '/Sound'
 DISPLAY_WIDTH = 800
 DISPLAY_HEIGHT = 900
 
@@ -141,7 +142,6 @@ def score_counter(count):
     text = font.render("Score: "+str(count), True, BLACK)
     GAME_DISPLAY.blit(GREEN_BUTTON, (-75, -20))
     GAME_DISPLAY.blit(text, (0, 0))
-    
 
 
 def message_display(text, font, size, x_location, y_location, timer=None):
@@ -301,7 +301,6 @@ def music_player(music_number, song_track):
 def quit_game():
     close_db()
     pygame.quit()
-    quit()
 
 
 def high_score_board():
